@@ -1,0 +1,36 @@
+ <%- include('partials/head') %>
+  <div class='container text-white' style="width:60%;">
+      <form method="POST" action="/addBlog" >
+              <div class="mb-3">
+                <label for="name" class="form-label">Blog Name</label>
+                <input type="text" class="form-control" id="name" name="name" required placeholder="Blog Name">
+
+              </div>
+              <div class="mb-3">
+                <label for="image" class="form-label">Blog Image</label>
+                <input type="text" class="form-control" id="image" name="image"  placeholder="Enter Image Url" >
+              </div>
+              <div class="mb-3">
+                 <label for="image"  class="form-label">Blog Category</label>
+                 <select class='form-control' required name="blogCategory">
+                    <option>Food</option>
+                    <option>Fashion</option>
+                    <option>Education</option>
+                    <option>Others</option>
+                 </select>
+              </div>
+              <div class="mb-3">
+                  <label for="intro" class="form-label">Blog Intro</label>
+                  <textarea class="form-control" cols='50' rows='5' maxlength="200" required name="blogIntro"></textarea>
+               </div>
+                <div class="mb-3">
+                    <label for="content" class="form-label">Blog Content</label>
+                    <textarea class="form-control" cols='50' rows='5' name="blogContent"></textarea>
+                </div>
+                <div class="mb-3">
+                    <label for="content" class="form-label">Blog Outro</label>
+                    <textarea class="form-control" cols='50' maxlength="200" rows='5' name="blogOutro"></textarea>
+                </div>
+              <button  type="submit" class="btn mb-3 btn-primary">Submit</button>
+      </form>
+  </div>

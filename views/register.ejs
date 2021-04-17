@@ -1,0 +1,30 @@
+ <%- include('partials/head') %>
+
+
+<div class="container text-white" style="width:60%;height: 83vh;">
+    <h1 class="text-primary">Sign Up</h1>
+
+    <form method="POST" action="/register" >
+        <div class="mb-3">
+          <label for="username" class="form-label">Username</label>
+          <input type="text" class="form-control" id="username" name="uname" placeholder="Username">
+        </div>
+
+        <div class="mb-3">
+          <label for="email" class="form-label">E-mail</label>
+          <input type="email" class="form-control" id="email" name="email" placeholder="E-mail">
+        </div>
+
+        <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+            <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+        </div>
+
+        <div class="mb-3">
+            <label for="password" class="form-label">Confirm Password</label>
+            <input type="password" class="form-control" id="password" name="cpass" placeholder="Password">
+        </div>
+        <button type="submit" class="btn btn-success">Submit</button>
+    </form>
+
+</div>

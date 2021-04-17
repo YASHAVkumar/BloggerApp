@@ -1,0 +1,66 @@
+ <%- include('partials/head') %>
+<div class="container" style="width:60%;">
+    <h1>Edit Product</h1>
+
+    <form method="POST" action="/myBlog/edit/<%= blog._id %>?_method=PATCH">
+        <div class="mb-3">
+            <label for="name" class="form-label">Blog Name</label>
+            <input type="text" class="form-control" id="name" name="name" value='<%=blog.name%>' placeholder="Blog Name">
+        </div>
+
+        <div class="mb-3">
+            <label for="image" class="form-label">Blog Image</label>
+            <input type="text" class="form-control" id="image" name="image" value='<%=blog.image%>' placeholder="Product Image" >
+        </div>
+
+        <div class="mb-3">
+            <label for="image" class="form-label">Blog Category</label>
+            <select class='form-control' value="<%= blog.blogCategory %>" name="blogCategory">
+                <% if(blog.blogCategory==='Food'){%>
+                    <option value="Food" selected>Food</option>
+                <%}else{%>
+                     <option value="Food">Food</option>
+                <%}%>
+
+                <% if(blog.blogCategory==='Fashion'){%>
+                     <option value="Fashion" selected>Fashion</option>
+                <%}else{%>
+                     <option value="Fashion">Fashion</option>
+                <%}%>
+
+                <% if(blog.blogCategory==='Education'){%>
+                     <option value="Education" selected>Education</option>
+                <%}else{%>
+                     <option value="Education">Education</option>
+                <%}%>
+
+                <% if(blog.blogCategory=='Others'){%>
+                     <option value="Others" selected>Others</option>
+                <%}else{%>
+                     <option value="Others">Others</option>
+                <%}%>
+
+            </select>
+        </div>
+
+         <div class="mb-3">
+             <label for="intro" class="form-label">Blog Intro</label>
+             <textarea class="form-control" cols='50' rows='5' maxlength="200" name="blogIntro"><%= blog.blogIntro %></textarea>
+         </div>
+
+         <div class="mb-3">
+              <label for="content" class="form-label">Blog Content</label>
+              <textarea class="form-control" cols='50'  rows='5' name="blogContent"><%= blog.blogContent%></textarea>
+         </div>
+
+         <div class="mb-3">
+              <label for="content" class="form-label">Blog Outro</label>
+              <textarea class="form-control" cols='50' rows='5' maxlength="200" name="blogOutro"><%= blog.blogOutro%></textarea>
+         </div>
+
+         <button  type="submit" class="btn mb-3 btn-primary">Submit</button>
+    </form>
+
+</div>
+
+

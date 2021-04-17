@@ -1,0 +1,159 @@
+ <%- include('partials/head') %>
+<style>
+hr{
+      background-color:white;
+   }
+
+
+   * {box-sizing: border-box;}
+
+   .img-magnifier-container {
+     position: relative;
+   }
+
+   .img-magnifier-glass {
+     position: absolute;
+     border: 3px solid #000;
+     border-radius: 50%;
+     cursor: none;
+     /*Set the size of the magnifier glass:*/
+     width: 60px;
+     height: 60px;
+   }
+</style>
+
+<div class="container">
+<div class="container pt-3 shadow-lg text-white">
+   <div class="row mt-3">
+      <div class="col-sm-8">
+
+          <% if(obj.blog.image!=""){%>
+             <div class="img-magnifier-container">
+               <img id="myimage" src="<%= obj.blog.image%>" style="height:350px;width:100%" alt="...">
+              </div>
+          <%}%>
+      </div>
+      <div class="col-sm-4">
+           <%= obj.blog.blogIntro %>
+      </div>
+   </div>
+   <hr>
+   <div>
+      <%= obj.blog.blogContent %><br><hr>
+      <%= obj.blog.blogOutro %><br>
+    <br><br>
+    <div class="container" style="display:flex;">
+      <% if(currentUser){  for(let i of currentUser.userBlogs){  if(String(i._id)===String(obj.blog._id)){ %>
+          <a href="/myBlog/edit/<%= obj.blog._id %>" class="btn btn-light mr-5" style='width:8rem;height:40px;'>Edit</a>
+          <form method="POST" action=/myBlog/delete/<%= obj.blog._id%>?_method=DELETE>
+              <button class="btn btn-lg btn-light" style='width:8rem;height:40px;'>Delete</button>
+          </form>
+      <%}}}%>
+     <div>
+   </div>
+</div>
+
+
+
+   <div class="container mt-3 border border-warning pt-3" >
+       <h2>Comment Section </h2>
+       <% if(currentUser){%>
+        <div class="container">
+            <form method="POST" action="/myBlogs/<%=obj.userId%>/Blog/<%=obj.blog._id%>">
+                <div class="mb-3">
+                   <label for="comment" class="form-label">Ratting</label><br>
+                   <input class="form-control" type="range" min="1" max="5" name="rating" id="rating">
+                </div>
+                <div class="mb-3">
+                    <label for="comment" class="form-label">Comment</label>
+                    <textarea class="form-control" cols='50' style="font-size:1.4rem" placeholder="Enter Your Comment Here" rows='2' maxlength="200" name="comment"></textarea>
+                </div>
+                <button class="btn btn-primary btn-lg">Save </button>
+            </form>
+        </div>
+      <%}%>
+       <br>
+      <section>
+      <hr>
+           <% for(let review  of obj.blog.reviews){%>
+              <div class="container border border-light p-3 w-50">
+                  <div><h3><i class="fas fa-user"></i>  <%=review.username%></h3></div>
+                  <div class="float-right">Rating - <%=review.rating %></div>
+                  <div><p><%=review.comment %></p></div>
+              </div>
+              <br>
+           <%}%>
+
+      </section>
+   </div>
+
+
+</div>
+
+<script>
+
+
+     function magnify(imgID, zoom) {
+       var img, glass, w, h, bw;
+       img = document.getElementById(imgID);
+
+       /* Create magnifier glass: */
+       glass = document.createElement("DIV");
+       glass.setAttribute("class", "img-magnifier-glass");
+
+       /* Insert magnifier glass: */
+       img.parentElement.insertBefore(glass, img);
+
+       /* Set background properties for the magnifier glass: */
+       glass.style.backgroundImage = "url('" + img.src + "')";
+       glass.style.backgroundRepeat = "no-repeat";
+       glass.style.backgroundSize = (img.width * zoom) + "px " + (img.height * zoom) + "px";
+       bw = 3;
+       w = glass.offsetWidth / 2;
+       h = glass.offsetHeight / 2;
+
+       /* Execute a function when someone moves the magnifier glass over the image: */
+       glass.addEventListener("mousemove", moveMagnifier);
+       img.addEventListener("mousemove", moveMagnifier);
+
+       /*and also for touch screens:*/
+       glass.addEventListener("touchmove", moveMagnifier);
+       img.addEventListener("touchmove", moveMagnifier);
+       function moveMagnifier(e) {
+         var pos, x, y;
+         /* Prevent any other actions that may occur when moving over the image */
+         e.preventDefault();
+         /* Get the cursor's x and y positions: */
+         pos = getCursorPos(e);
+         x = pos.x;
+         y = pos.y;
+         /* Prevent the magnifier glass from being positioned outside the image: */
+         if (x > img.width - (w / zoom)) {x = img.width - (w / zoom);}
+         if (x < w / zoom) {x = w / zoom;}
+         if (y > img.height - (h / zoom)) {y = img.height - (h / zoom);}
+         if (y < h / zoom) {y = h / zoom;}
+         /* Set the position of the magnifier glass: */
+         glass.style.left = (x - w) + "px";
+         glass.style.top = (y - h) + "px";
+         /* Display what the magnifier glass "sees": */
+         glass.style.backgroundPosition = "-" + ((x * zoom) - w + bw) + "px -" + ((y * zoom) - h + bw) + "px";
+       }
+
+       function getCursorPos(e) {
+         var a, x = 0, y = 0;
+         e = e || window.event;
+         /* Get the x and y positions of the image: */
+         a = img.getBoundingClientRect();
+         /* Calculate the cursor's x and y coordinates, relative to the image: */
+         x = e.pageX - a.left;
+         y = e.pageY - a.top;
+         /* Consider any page scrolling: */
+         x = x - window.pageXOffset;
+         y = y - window.pageYOffset;
+         return {x : x, y : y};
+       }
+     }
+
+
+     magnify("myimage", 2);
+</script>

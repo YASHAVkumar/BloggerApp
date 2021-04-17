@@ -1,0 +1,127 @@
+ <%- include('partials/head') %>
+<div class="container shadow-lg text-white">
+   <div class="jumbotron bg-warning text-primary rounded-circle border border-primary" style="height:10px;text-align:center"><h2 style="margin-top:-20px;"><i class="fas fa-user"></i>     <%= currentUser.username %></h2></div>
+      <div class="container-fluid">
+         <br>
+         <h3 class="cat">FOOD BLOG</h3>
+
+         <table class='table table-responsive'>
+             <tr>
+               <% for(blog of blogs){%>
+                  <% if(blog.blogCategory==="Food"){%>
+                      <td>
+                          <div class="card shadow-lg">
+                              <div class="card" style="width: 20rem;">
+                                  <div class="card-title pd-3 ml-3"><%= blog.name %></div>
+                                      <% if(blog.image!=""){%>
+                                          <img src="<%= blog.image%>" style="height:350px" alt="...">
+                                      <%}%>
+
+                                          <div class="card-body">
+                                             <a href='/myBlogs/<%=currentUser._id %>/Blog/<%= blog._id %>'> <%= blog.blogIntro %></a>
+                                             <br>
+                                             <hr>
+                                             <span>Blog By :- <%=currentUser.username%></span>
+                                          </div>
+                                  </div>
+                              </div>
+                          </div>
+                      </td>
+                  <%}%>
+               <%}%>
+             <tr>
+         </table>
+         <hr>
+      </div>
+
+      <div class="container-fluid">
+         <h2 class="cat">FASHION BLOG</h2>
+            <table class='table table-responsive'>
+                <tr>
+                   <% for(blog of blogs){%>
+                      <% if(blog.blogCategory==="Fashion"){%>
+                         <td>
+                             <div class="card shadow-lg">
+                                <div class="card" style="width: 20rem;">
+                                   <div class="card-title pd-3 ml-3"><%= blog.name %></div>
+                                       <% if(blog.image!=""){%>
+                                          <img src="<%= blog.image%>" style="height:350px" alt="...">
+                                       <%}%>
+                                           <div class="card-body">
+                                               <a href='/myBlogs/<%= currentUser._id %>/Blog/<%= blog._id %>'> <%= blog.blogIntro %></a>
+                                                <br>
+                                                 <hr>
+                                                 <span>Blog By :- <%=currentUser.username%></span>
+                                           </div>
+                                   </div>
+                                </div>
+                             </div>
+                         </td>
+                      <%}%>
+                   <%}%>
+                <tr>
+            </table>
+      </div>
+      <hr>
+
+      <div class="container-fluid">
+        <h2 class="cat">EDUCATION LOG</h2>
+           <table class='table table-responsive'>
+              <tr>
+                <% for(blog of blogs){%>
+                   <% if(blog.blogCategory==="Education"){%>
+                      <td>
+                          <div class="card shadow-lg">
+                               <div class="card" style="width: 20rem;">
+                                    <div class="card-title pd-3 ml-3"><%= blog.name %></div>
+                                          <% if(blog.image!=""){%>
+                                              <img src="<%= blog.image%>" style="height:350px" alt="...">
+                                          <%}%>
+                                               <div class="card-body">
+                                                    <a href='/myBlogs/<%= currentUser._id %>/Blog/<%= blog._id %>'> <%= blog.blogIntro %></a>
+                                                     <br>
+                                                     <hr>
+                                                     <span>Blog By :- <%=currentUser.username%></span>
+                                               </div>
+                                    </div>
+                               </div>
+                          </div>
+                      </td>
+                   <%}%>
+                <%}%>
+              <tr>
+           </table>
+      </div>
+      <hr>
+
+      <div class="container-fluid">
+         <h2 class="cat">Others</h2>
+            <table class='table table-responsive'>
+              <tr>
+                 <% for(blog of blogs){%>
+                    <% if(blog.blogCategory==="Others"){%>
+                      <td>
+                         <div class="card shadow-lg">
+                            <div class="card" style="width: 20rem;">
+                               <div class="card-title pd-3 ml-3"><%= blog.name %></div>
+                                  <% if(blog.image!=""){%>
+                                     <img src="<%= blog.image%>" style="height:350px" alt="...">
+                                  <%}%>
+                                     <div class="card-body">
+                                         <a href='/myBlogs/<%= currentUser._id %>/Blog/<%= blog._id %>'> <%= blog.blogIntro %></a>
+                                         <br>
+                                         <hr>
+                                         <span>Blog By :- <%=currentUser.username%></span>
+                                     </div>
+                               </div>
+                            </div>
+                         </div>
+                      </td>
+                 <%}}%>
+              <tr>
+            </table>
+      </div>
+
+</div>
+
+
